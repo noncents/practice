@@ -23,6 +23,13 @@ public class BinaryPuzzles {
 		findOnesInBinaryNumber(7);
 		findOnesInBinaryNumber(2147483647);
 
+		findOnesInBinaryNumber_naive(0);
+		findOnesInBinaryNumber_naive(1);
+		findOnesInBinaryNumber_naive(2);
+		findOnesInBinaryNumber_naive(3);
+		findOnesInBinaryNumber_naive(7);
+		findOnesInBinaryNumber_naive(2147483647);
+
 	}
 
 	/**
@@ -51,15 +58,17 @@ public class BinaryPuzzles {
 	public static void findOnesInBinaryNumber_naive(int number) {
 
 		int onesCount = 0;
+		int n = number;
 
-		for (int i = 0; i < 32; i++) {
+		while (number != 0) {
 
-			if ((number >> i & 1) == 1) {
+			if ((number & 1) == 1) {
 				onesCount++;
 			}
+			number >>= 1;
 		}
 
-		System.out.println("There are [" + onesCount + "] 1s in the number " + number);
+		System.out.println("There are [" + onesCount + "] 1s in the number " + n);
 
 	}
 
