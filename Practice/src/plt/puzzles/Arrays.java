@@ -5,6 +5,8 @@ public class Arrays {
 	public static void main(String[] args) {
 
 		spiralPrintNxNArray();
+
+		test_findIndexOfItem();
 	}
 
 	public static void spiralPrintNxNArray() {
@@ -81,6 +83,144 @@ public class Arrays {
 			System.out.print(arr[x][y] + " ");
 		}
 
+	}
+
+	public static void test_findIndexOfItem() {
+
+		int[] arr1 = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		System.out.println("Index of 5 should be 5: >> " + findIndexOfItem(arr1, 0, arr1.length - 1, 5));
+
+		int[] arr2 = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		System.out.println("Index of 0 should be 0: >> " + findIndexOfItem(arr2, 0, arr2.length - 1, 0));
+
+		int[] arr3 = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+		System.out.println("Index of 10 should be 10: >> " + findIndexOfItem(arr3, 0, arr3.length - 1, 10));
+
+		int[] arr4 = new int[] { 0, 1, 2, 3, 4, 5 };
+		System.out.println("Index of 4 should be 4: >> " + findIndexOfItem(arr4, 0, arr4.length - 1, 4));
+
+		int[] arr5 = new int[] { 0, 1, 2, 3, 4, 5 };
+		System.out.println("Index of 2 should be 2: >> " + findIndexOfItem(arr5, 0, arr5.length - 1, 2));
+
+		int[] arr6 = new int[] { 0, 1, 2, 3, 4, 5 };
+		System.out.println("Index of 6 should be -1: >> " + findIndexOfItem(arr6, 0, arr6.length - 1, 6));
+
+		int[] arr7 = new int[] { 0, 1 };
+		System.out.println("Index of 0 should be 0: >> " + findIndexOfItem(arr7, 0, arr7.length - 1, 0));
+
+		int[] arr8 = new int[] { 0, 1 };
+		System.out.println("Index of 1 should be 1: >> " + findIndexOfItem(arr8, 0, arr8.length - 1, 1));
+
+		System.out.println();
+
+		// System.out.println("Index of 5 should be 5: >> "
+		// + findIndexOfItem_Iterative(arr1, 0, arr1.length - 1, 5));
+		// System.out.println("Index of 0 should be 0: >> "
+		// + findIndexOfItem_Iterative(arr2, 0, arr2.length - 1, 0));
+		System.out.println("Index of 10 should be 10: >> "
+				+ findIndexOfItem_Iterative(arr3, 0, arr3.length - 1, 10));
+		System.out.println("Index of 4 should be 4: >> "
+				+ findIndexOfItem_Iterative(arr4, 0, arr4.length - 1, 4));
+		System.out.println("Index of 2 should be 2: >> "
+				+ findIndexOfItem_Iterative(arr5, 0, arr5.length - 1, 2));
+		System.out.println("Index of 6 should be -1: >> "
+				+ findIndexOfItem_Iterative(arr6, 0, arr6.length - 1, 6));
+		System.out.println("Index of 0 should be 0: >> "
+				+ findIndexOfItem_Iterative(arr7, 0, arr7.length - 1, 0));
+		System.out.println("Index of 1 should be 1: >> "
+				+ findIndexOfItem_Iterative(arr8, 0, arr8.length - 1, 1));
+	}
+
+	/**
+	 * Finds the index of the item in sorted array
+	 * 
+	 * @return
+	 */
+	public static int findIndexOfItem(int[] arr, int low, int high, int value) {
+
+		int index = -1;
+
+		if (arr.length == 0) {
+			return -1;
+		}
+
+		if (high - low == 0 && arr[low] != value) {
+			return -1;
+		}
+
+		if (arr[0] > arr[arr.length - 1]) {
+			return -1;
+		}
+
+		int mid = low + (high - low) / 2;
+
+		if (value < arr[mid]) {
+			index = findIndexOfItem(arr, low, mid - 1, value);
+		}
+		else if (value > arr[mid]) {
+			index = findIndexOfItem(arr, mid + 1, high, value);
+		}
+		else {
+			if (arr[mid] == value) {
+				return mid;
+			}
+		}
+
+		return index;
+	}
+
+	/**
+	 * Finds the index of the item in sorted array, ITERATIVE way
+	 * 
+	 * @return
+	 */
+	public static int findIndexOfItem_Iterative(int[] arr, int low, int high, int value) {
+
+		int index = -1;
+
+		// array is empty
+		if (arr.length == 0) {
+			return -1;
+		}
+
+		// array only has 1 item
+		if (high - low == 0 && arr[low] != value) {
+			return -1;
+		}
+
+		// array is not sorted
+		if (arr[0] > arr[arr.length - 1]) {
+			return -1;
+		}
+
+		while (true) {
+
+			if (high - low == 0 && arr[low] != value) {
+				break;	// -1
+			}
+
+			if (arr[low] > arr[high]) {
+				break; // -1
+			}
+
+			int mid = low + (high - low) / 2;
+
+			if (value < arr[mid]) {
+				high = mid - 1;
+			}
+			else if (value > arr[mid]) {
+				low = mid + 1;
+			}
+			else {
+				if (arr[mid] == value) {
+					index = mid;
+				}
+				break;
+			}
+
+		}
+
+		return index;
 	}
 
 }

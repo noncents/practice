@@ -18,6 +18,8 @@ public class StringPuzzles {
 
 		// String str = "patrick tan is a horny chinese mafia..";
 		// System.out.println(reverseWords(str.toCharArray()));
+
+		permutation("abcd");
 	}
 
 	public static void test_findFirstNonRepeatingChar() {
@@ -97,16 +99,24 @@ public class StringPuzzles {
 		}
 	}
 
+	/**
+	 * Pavel's version
+	 * 
+	 * @param str
+	 */
 	public static void permutation(String str) {
 
+		System.out.println();
 		permutation("", str);
 	}
 
 	private static void permutation(String prefix, String str) {
 
+		// System.out.println("[" + prefix + "] " + "[" + str + "] ");
+
 		int n = str.length();
 		if (n == 0) {
-			System.out.println(prefix);
+			System.out.print(prefix + " ");
 		}
 		else {
 			for (int i = 0; i < n; i++) {
