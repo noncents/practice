@@ -16,8 +16,8 @@ public class StringPuzzles {
 		System.out.println(reverseWordsInAReversedString("patrick tan"));
 		System.out.println(reverseWordsInAReversedString("patrick tan is a horny chinese mafia.."));
 
-		String str = "patrick tan is a horny chinese mafia..";
-		System.out.println(reverseWords(str.toCharArray()));
+		// String str = "patrick tan is a horny chinese mafia..";
+		// System.out.println(reverseWords(str.toCharArray()));
 	}
 
 	public static void test_findFirstNonRepeatingChar() {
@@ -190,42 +190,42 @@ public class StringPuzzles {
 		}
 
 	}
+	/*
+		public static char[] reverseWords(char[] sentence) {
 
-	public static char[] reverseWords(char[] sentence) {
+			reverseString(sentence, 0, sentence.length);
+			int wordStart = 0, i = 0;
+			while (i < sentence.length) {
+				if (sentence[i] == ' ') {
+					reverseString(sentence, wordStart, i);
+					wordStart = ++i;
+				}
+				else if (i == sentence.length - 1) {
+					reverseString(sentence, wordStart, i + 1);
+					i++;
+				}
+				else {
+					i++;
+				}
+			}
 
-		reverseString(sentence, 0, sentence.length);
-		int wordStart = 0, i = 0;
-		while (i < sentence.length) {
-			if (sentence[i] == ' ') {
-				reverseString(sentence, wordStart, i);
-				wordStart = ++i;
-			}
-			else if (i == sentence.length - 1) {
-				reverseString(sentence, wordStart, i + 1);
-				i++;
-			}
-			else {
-				i++;
-			}
+			return sentence;
 		}
 
-		return sentence;
-	}
+		public static char[] reverseString(char[] string, int start, int end) {
 
-	public static char[] reverseString(char[] string, int start, int end) {
+			for (int i = start; i < (start + end) / 2; i++) {
+				swap(string, i, start + end - i - 1);
+			}
 
-		for (int i = start; i < (start + end) / 2; i++) {
-			swap(string, i, start + end - i - 1);
+			return string;
 		}
 
-		return string;
-	}
+		private static void swap(char[] array, int a, int b) {
 
-	private static void swap(char[] array, int a, int b) {
-
-		char temp = array[a];
-		array[a] = array[b];
-		array[b] = temp;
-	}
-
+			char temp = array[a];
+			array[a] = array[b];
+			array[b] = temp;
+		}
+	*/
 }
