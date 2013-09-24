@@ -7,6 +7,11 @@ public class SLList {
 		Node sll = convertArrToList(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
 		traverseList(sll);
 
+		traverseList(reverseList(convertArrToList(new int[] { 1 })));
+		traverseList(reverseList(convertArrToList(new int[] { 1, 2 })));
+		traverseList(reverseList(convertArrToList(new int[] { 1, 2, 3, 4, 5 })));
+		traverseList(reverseList(convertArrToList(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })));
+
 		traverseList(removeMidElement(convertArrToList(new int[] { 1 })));
 		traverseList(removeMidElement(convertArrToList(new int[] { 1, 2 })));
 		traverseList(removeMidElement(convertArrToList(new int[] { 1, 2, 3 })));
@@ -15,6 +20,37 @@ public class SLList {
 		traverseList(removeMidElement(convertArrToList(new int[] { 1, 2, 3, 4, 5, 6 })));
 		traverseList(removeMidElement(convertArrToList(new int[] { 1, 2, 3, 4, 5, 6, 7 })));
 
+	}
+
+	public static Node reverseList(Node node) {
+
+		// Node head = null;
+
+		if (node != null) {
+			// head = node;
+			Node prev = node;
+			Node temp = node.next;
+			prev.next = null;
+
+			while (temp != null) {
+
+				node = temp;
+
+				if (node.next == null) {
+					node.next = prev;
+					temp = null;
+				}
+				else {
+					temp = node.next;	// save next
+					node.next = prev;
+					prev = node;
+					node = temp;
+				}
+			}
+
+		}
+
+		return node;
 	}
 
 	public static Node removeMidElement(Node node) {

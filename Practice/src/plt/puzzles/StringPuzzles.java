@@ -20,6 +20,21 @@ public class StringPuzzles {
 		// System.out.println(reverseWords(str.toCharArray()));
 
 		permutation("abcd");
+
+		System.out.println("\nisNumberPalindrome(12345) " + isNumberPalindrome(12345));
+		System.out.println("isNumberPalindrome(12321) " + isNumberPalindrome(12321));
+		System.out.println("isNumberPalindrome(0) " + isNumberPalindrome(0));
+		System.out.println("isNumberPalindrome(565) " + isNumberPalindrome(565));
+		System.out.println("isNumberPalindrome(8888) " + isNumberPalindrome(8888));
+		System.out.println("isNumberPalindrome(100) " + isNumberPalindrome(100));
+
+		System.out.println("\nisNumberPalindrome(12345) " + isPalindrome(12345));
+		System.out.println("isNumberPalindrome(12321) " + isPalindrome(12321));
+		System.out.println("isNumberPalindrome(0) " + isPalindrome(0));
+		System.out.println("isNumberPalindrome(565) " + isPalindrome(565));
+		System.out.println("isNumberPalindrome(8888) " + isPalindrome(8888));
+		System.out.println("isNumberPalindrome(100) " + isPalindrome(100));
+
 	}
 
 	public static void test_findFirstNonRepeatingChar() {
@@ -200,6 +215,7 @@ public class StringPuzzles {
 		}
 
 	}
+
 	/*
 		public static char[] reverseWords(char[] sentence) {
 
@@ -238,4 +254,81 @@ public class StringPuzzles {
 			array[b] = temp;
 		}
 	*/
+
+	public static boolean isNumberPalindrome_Iterative(long number) {
+
+		long converted = 0;
+		long divider = 1;
+
+		while (number / divider != 0) {
+
+			converted = converted * 10 + number / divider % 10;
+			divider *= 10;
+		}
+
+		return converted == number;
+	}
+
+	public static boolean isNumberPalindrome(long number) {
+
+		return number == isNumberPalindrome_(number, 0);
+	}
+
+	public static long isNumberPalindrome_(long number, long currentVal) {
+
+		long amount = number % 10;
+
+		if (number / 10 != 0) {
+			amount = isNumberPalindrome_(number / 10, currentVal * 10 + amount);
+		}
+		else {
+			return currentVal * 10 + amount;
+		}
+
+		return amount;
+
+	}
+
+	public static boolean isPalindromeRecursive(int x, int y) {
+
+		if (x < 0) {
+			return false;
+		}
+		if (x == 0) {
+			return true;
+		}
+		if (isPalindromeRecursive(x / 10, y) && x % 10 == y % 10) {
+			y /= 10;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean isPalindromeRecursive_pf(int x) {
+
+		return isPalindromeRecursive(x, x);
+	}
+
+	public static boolean isPalindrome(int x) {
+
+		if (x < 0) {
+			return false;
+		}
+		int div = 1;
+		while (x / div >= 10) {
+			div *= 10;
+		}
+		while (x != 0) {
+			int l = x / div;
+			int r = x % 10;
+			if (l != r) {
+				return false;
+			}
+			x = x % div / 10;
+			div /= 100;
+		}
+		return true;
+	}
 }
