@@ -16,18 +16,24 @@ public class Practice {
    * @param args
    */
   public static void main(String[] args) {
-
     Practice list = new Practice();
+    Node rvsStart = null;
 
-    list.insert(1);
-    list.insert(2);
-    list.insert(3);
-    list.insert(4);
     list.insert(5);
+    list.insert(4);
+    list.insert(3);
+    list.insert(2);
+    list.insert(1);
 
-    list.deleteMidElement();
+    // list.deleteMidElement();
 
-    list.printList();
+    list.printList(rvsStart);
+
+    System.out.println("");
+
+    rvsStart = list.reverseLinkedList();
+
+    list.printList(rvsStart);
 
   }
 
@@ -35,6 +41,7 @@ public class Practice {
   Node tail = null;
 
   // Delete middle of Singly-linked list
+  @SuppressWarnings("javadoc")
   public void deleteMidElement() {
     Node slowNode = header;
     Node fastNode = header;
@@ -74,14 +81,34 @@ public class Practice {
 
   }
 
-  public void printList() {
-
+  public void printList(Node argNode) {
     Node currNode = header;
 
+    if (argNode != null) {
+      currNode = argNode;
+    }
+
     while (currNode != null) {
-      System.out.println(currNode.data);
+      System.out.print(currNode.data + " ");
       currNode = currNode.next;
     }
 
+  }
+
+  // Reverse the order of linked list
+  @SuppressWarnings("javadoc")
+  public Node reverseLinkedList() {
+    Node temp;
+    Node reverseStart = null;
+    Node currNode = header;
+
+    while (currNode != null) {
+      temp = currNode.next;
+      currNode.next = reverseStart;
+      reverseStart = currNode;
+      currNode = temp;
+    }
+
+    return reverseStart;
   }
 }
