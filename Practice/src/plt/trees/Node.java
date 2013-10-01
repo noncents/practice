@@ -10,6 +10,11 @@ public class Node {
 
 	}
 
+	public String toString() {
+
+		return String.valueOf(value);
+	}
+
 	public Node(int value, Node left, Node right) {
 
 		this.value = value;

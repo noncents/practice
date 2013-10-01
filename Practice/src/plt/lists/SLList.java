@@ -1,5 +1,6 @@
 package plt.lists;
 
+
 public class SLList {
 
 	public static void main(String[] args) {

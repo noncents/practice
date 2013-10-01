@@ -1,5 +1,7 @@
 package plt.puzzles;
 
+import java.util.Stack;
+
 public class StringPuzzles {
 
 	public static void main(String[] args) {
@@ -34,6 +36,15 @@ public class StringPuzzles {
 		System.out.println("isNumberPalindrome(565) " + isPalindrome(565));
 		System.out.println("isNumberPalindrome(8888) " + isPalindrome(8888));
 		System.out.println("isNumberPalindrome(100) " + isPalindrome(100));
+
+		String strPath = "C:\\abc\\def\\ghi\\..\\.\\jkl\\.\\..\\mno";	// C:\\abc\\def\\mno
+		System.out.println("" + getAbsolutePath(strPath));
+
+		String strPath2 = "C:\\abc\\def\\ghi\\..\\.\\jkl\\.\\..\\mno\\";	// C:\\abc\\def\\mno
+		System.out.println("" + getAbsolutePath(strPath2));
+
+		String strPath3 = "C:\\";	// C:\\abc\\def\\mno
+		System.out.println("" + getAbsolutePath(strPath3));
 
 	}
 
@@ -331,4 +342,77 @@ public class StringPuzzles {
 		}
 		return true;
 	}
+
+	public static String getAbsolutePath(String strPath) {
+
+		Stack<String> stack = new Stack<String>();
+
+		String delimeter = "\\";
+
+		int index = -1;
+		int startIndex = 0;
+
+		while ((index = strPath.indexOf(delimeter, startIndex)) > 0 && startIndex <= strPath.length()) {
+
+			String dirName = strPath.substring(startIndex, index);
+
+			if (!evaluateDirName(stack, dirName)) {
+				stack.push(dirName);
+			}
+			startIndex = index + 1;
+		}
+
+		// we never found a change in directory, so just return original value
+		if (startIndex == -1) {
+			return strPath;
+		}
+		else {
+
+			if (startIndex < strPath.length() - 1) {
+				// get the last dir name
+				String dirName = strPath.substring(startIndex, strPath.length());
+
+				if (!evaluateDirName(stack, dirName)) {
+					stack.push(dirName);
+				}
+			}
+
+			StringBuilder sb = new StringBuilder();
+
+			Stack<String> stack2 = new Stack<String>();
+			while (!stack.isEmpty()) {
+				stack2.push(stack.pop());
+			}
+
+			while (!stack2.isEmpty()) {
+				sb.append(stack2.pop());
+				sb.append(delimeter);
+			}
+
+			return sb.toString().substring(0, sb.toString().length() - delimeter.length());	// remove the last
+																							// delimeter
+		}
+
+	}
+
+	private static boolean evaluateDirName(Stack<String> stack, String dirName) {
+
+		if (dirName.equals(".")) {
+			// do nothing
+		}
+		else if (dirName.equals("..")) {
+			if (!stack.isEmpty()) {
+				stack.pop();
+			}
+			else {
+				// throw exception -- invalid value
+			}
+		}
+		else {
+			return false;
+		}
+
+		return true;
+	}
+
 }
