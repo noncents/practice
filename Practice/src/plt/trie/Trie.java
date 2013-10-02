@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Code copied from wikipedia Trie sample
+ * 
+ * @author Patrick Tan
+ * 
+ */
 public class Trie {
 
 	private Node root = new Node("");

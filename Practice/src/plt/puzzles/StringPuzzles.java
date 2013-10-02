@@ -46,6 +46,10 @@ public class StringPuzzles {
 		String strPath3 = "C:\\";	// C:\\abc\\def\\mno
 		System.out.println("" + getAbsolutePath(strPath3));
 
+		System.out.println(shortenString("abbcccddddeeeffg"));
+		System.out.println(shortenString("abcdefg"));
+		System.out.println(shortenString("zzzzzyyyyyxxxwww"));
+
 	}
 
 	public static void test_findFirstNonRepeatingChar() {
@@ -413,6 +417,46 @@ public class StringPuzzles {
 		}
 
 		return true;
+	}
+
+	public static String shortenString(String str) {
+
+		char currCh = 0;
+		int count = 0;
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < str.length(); i++) {
+
+			if (count == 0 || currCh == str.charAt(i)) {
+				currCh = str.charAt(i);
+				count++;
+			}
+			else {
+				sb.append(currCh);
+				sb.append(String.valueOf(count));
+				// set new char
+				currCh = str.charAt(i);
+				count = 1;
+
+			}
+		}
+
+		if (count > 0) {
+			sb.append(currCh);
+			sb.append(String.valueOf(count));
+		}
+
+		return sb.toString();
+	}
+
+	private static String findLongestRepeatingSubstring(String str) {
+
+		char[] cs = str.toCharArray();
+		int len = str.length();
+
+		// for(int i=0; )
+
+		return null;
 	}
 
 }
