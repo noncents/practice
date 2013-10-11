@@ -18,8 +18,21 @@ public class Puzzles {
     // bracketsPair(3);
 
     // Divide a number over the other without using mathematical operations
-    int test = divideIT(25, 5);
-    System.out.println(test);
+    // int test = divideIT(25, 5);
+    // System.out.println(test);
+
+    // Factorial Recursion
+    // System.out.println(getFactorial(5));
+
+    // Prime Numbers
+    // getPrimeNumbers(100);
+
+    // Prime between 2 Numbers
+    // getPrimeBetTwoNum(5, 80);
+
+    // Nth Fibonacci
+    // getNthFibonacci(7);
+    System.out.println(getNthFibRecursive(2));
   }
 
   // Print all the combination of n pairs of brackets. Should be balance.
@@ -83,6 +96,15 @@ public class Puzzles {
     }
   }
 
+  private static int getFactorial(int argN) {
+    if (argN <= 1) {
+      return 1;
+    }
+    else {
+      return getFactorial(argN - 1) * argN;
+    }
+  }
+
   // Get the first 2 sum from an array
   private static void getFirst2Sum(int[] argArray, int argNumber) {
     Map<Integer, Integer> map = new HashMap<>();
@@ -95,6 +117,79 @@ public class Puzzles {
       }
       else {
         map.put(i, i);
+      }
+    }
+  }
+
+  private static void getNthFibonacci(int argN) {
+    int fibN = 1;
+    int fibN_1 = 0;
+    int temp = 0;
+
+    for (int i = 1; i < argN; i++ ) {
+      temp = fibN;
+      fibN += fibN_1;
+      fibN_1 = temp;
+    }
+    System.out.println(fibN);;
+  }
+
+  private static int getNthFibRecursive(int argN) {
+    if (argN < 1) {
+      return 0;
+    }
+    if (argN == 1) {
+      return 1;
+    }
+    return getNthFibRecursive(argN - 1) + getNthFibRecursive(argN - 2);
+  }
+
+  private static void getPrimeBetTwoNum(int argA, int argB) {
+    boolean isPrime;
+    if (argB < argA) {
+      return;
+    }
+
+    if (argA == 1 && argA == argB) {
+      System.out.println(1);
+    }
+    else {
+      if (argA == 1) {
+        ++argA;
+      }
+      for (int i = argA; i <= argB; i++ ) {
+        isPrime = true;
+        for (int j = 2; j <= Math.sqrt(i); j++ ) {
+          if (i % j == 0) {
+            isPrime = false;
+            break;
+          }
+        }
+        if (isPrime) {
+          System.out.println(i);
+        }
+      }
+
+    }
+  }
+
+  private static void getPrimeNumbers(int argN) {
+    boolean isPrime;
+    if (argN <= 1) {
+      System.out.println(1);
+    }
+    else {
+      for (int i = 2; i < argN; i++ ) {
+        isPrime = true;
+        for (int j = 2; j <= Math.sqrt(i); j++ ) {
+          if (i % j == 0) {
+            isPrime = false;
+            break;
+          }
+        }
+        if (isPrime) {
+          System.out.println(i);
+        }
       }
     }
   }
