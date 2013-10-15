@@ -1,420 +1,473 @@
 package plt.trees;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 public class BTrees {
 
-  public static Node copyTree(Node orig) {
+	public static Node copyTree(Node orig) {
 
-    if (orig == null) {
-      return null;
-    }
+		if (orig == null) {
+			return null;
+		}
 
-    // Node copy = null;
+		// Node copy = null;
 
-    // return copyTree(orig, new Node());
+		// return copyTree(orig, new Node());
 
-    return copyTree2(orig);
+		return copyTree2(orig);
 
-  }
+	}
 
-  public static Stack<Node> getShortestPath(Node root, Node a, Node b) {
+	public static Stack<Node> getShortestPath(Node root, Node a, Node b) {
 
-    Node lca = lca(root, a, b);
+		Node lca = lca(root, a, b);
 
-    Stack<Node> stack1 = new Stack<Node>();
-    Stack<Node> stack2 = new Stack<Node>();
+		Stack<Node> stack1 = new Stack<Node>();
+		Stack<Node> stack2 = new Stack<Node>();
 
-    stack1.push(lca);
+		stack1.push(lca);
 
-    getShortestPath(lca.left, a, stack1);
+		getShortestPath(lca.left, a, stack1);
 
-    while (!stack1.isEmpty()) {
-      stack2.push(stack1.pop());
-    }
+		while (!stack1.isEmpty()) {
+			stack2.push(stack1.pop());
+		}
 
-    getShortestPath(lca.right, b, stack2);
+		getShortestPath(lca.right, b, stack2);
 
-    System.out.println("Shortest path is >>> ");
+		System.out.println("Shortest path is >>> ");
 
-    while (!stack2.isEmpty()) {
-      System.out.println(stack2.pop().value + "");
-    }
+		while (!stack2.isEmpty()) {
+			System.out.println(stack2.pop().value + "");
+		}
 
-    return stack1;
-  }
+		return stack1;
+	}
 
-  public static boolean isSymmetric(Node root) {
+	public static boolean isSymmetric(Node root) {
 
-    if (root == null) {
-      return false;
-    }
+		if (root == null) {
+			return false;
+		}
 
-    return isSymmetric(root.left, root.right);
-  }
+		return isSymmetric(root.left, root.right);
+	}
 
-  public static boolean isSymmetric(Node left, Node right) {
+	public static boolean isSymmetric(Node left, Node right) {
 
-    if (left == null && right == null) {
-      return true;
-    }
+		if (left == null && right == null) {
+			return true;
+		}
 
-    if (left != null && right != null && left.value == right.value) {
-      return (isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left));
-    }
+		if (left != null && right != null && left.value == right.value) {
+			return (isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left));
+		}
 
-    return false;
+		return false;
 
-  }
+	}
 
-  public static Node lca(Node root, Node a, Node b) {
+	public static Node lca(Node root, Node a, Node b) {
 
-    if (root == null) {
-      return null;
-    }
+		if (root == null) {
+			return null;
+		}
 
-    if (root.value == a.value || root.value == b.value) {
-      return root;
-    }
+		if (root.value == a.value || root.value == b.value) {
+			return root;
+		}
 
-    Node left = lca(root.left, a, b);
-    Node right = lca(root.right, a, b);
+		Node left = lca(root.left, a, b);
+		Node right = lca(root.right, a, b);
 
-    if (left != null && right != null) {
-      return root;
-    }
+		if (left != null && right != null) {
+			return root;
+		}
 
-    if (left != null) return left;
+		if (left != null)
+			return left;
 
-    return right;
+		return right;
 
-  }
+	}
 
-  public static Node lowestCommonAncestor(Node root, Node a, Node b) {
+	public static Node lowestCommonAncestor(Node root, Node a, Node b) {
 
-    System.out.println("root value = " + (root == null ? "null" : root.value));
+		System.out.println("root value = " + (root == null ? "null" : root.value));
 
-    if (root == null) {
-      System.out.println("return: null");
-      return null;
-    }
-    if (root.value == a.value || root.value == b.value) {
-      System.out.println("return: " + root.value);
-      return root;
-    }
+		if (root == null) {
+			System.out.println("return: null");
+			return null;
+		}
+		if (root.value == a.value || root.value == b.value) {
+			System.out.println("return: " + root.value);
+			return root;
+		}
 
-    Node l = lowestCommonAncestor(root.left, a, b);
-    Node r = lowestCommonAncestor(root.right, a, b);
+		Node l = lowestCommonAncestor(root.left, a, b);
+		Node r = lowestCommonAncestor(root.right, a, b);
 
-    if (l != null && r != null) {
-      System.out.println("return: " + root.value);
-      return root; // if p and q are on both sides
-    }
+		if (l != null && r != null) {
+			System.out.println("return: " + root.value);
+			return root; // if p and q are on both sides
+		}
 
-    if (l != null) {
-      System.out.println("return: " + l.value);
-    }
-    else {
-      System.out.println("return: " + (r == null ? "null" : r.value));
-    }
-    return l != null ? l : r; // either one of p,q is on one side OR p,q is not in L&R subtrees
-  }
+		if (l != null) {
+			System.out.println("return: " + l.value);
+		}
+		else {
+			System.out.println("return: " + (r == null ? "null" : r.value));
+		}
+		return l != null ? l : r; // either one of p,q is on one side OR p,q is not in L&R subtrees
+	}
 
-  public static void main(String[] args) {
+	public static void main(String[] args) {
 
-    // testLCA();
+		// testLCA();
 
-    // testIsSymmetric();
+		// testIsSymmetric();
 
-    // testBFS();
+		testBFS();
 
-    testCopyTree();
+		// testCopyTree();
 
-  }
+	}
 
-  public static void testBFS() {
+	public static void testBFS() {
 
-    Node root = createTreeForTraversal();
+		Node root = createTreeForTraversal();
 
-    // traverseBFS(root);
-    System.out.println("Test traverseTreeSpirally start >");
-    traverseTreeSpirally(root);
-    System.out.println("\nTest traverseTreeSpirally  end  <");
-  }
+		// traverseBFS(root);
+		System.out.println("Test traverseTreeSpirally start >");
+		traverseTreeSpirally(root);
+		System.out.println("\nTest traverseTreeSpirally  end  <");
 
-  public static void testCopyTree() {
+		System.out.println("Test traverseTreePerLevel start >");
+		traverseTreePerLevel(root);
+		System.out.println("\nTest traverseTreePerLevel  end  <");
+	}
 
-    Node node = createTreeForTraversal();
-    traverseBFS(copyTree(node));
+	public static void testCopyTree() {
 
-  }
+		Node node = createTreeForTraversal();
+		traverseBFS(copyTree(node));
 
-  public static void testIsSymmetric() {
+	}
 
-    Node root = new Node();
-    root.value = 1;
-    root.left = getNewNode(2);
-    root.right = getNewNode(2);
-    //
-    // root.left.left = getNewNode(6);
-    // root.left.right = getNewNode(4);
-    //
-    // root.right.left = getNewNode(4);
-    // root.right.right = getNewNode(6);
-    //
-    // root.right.right.right = getNewNode(3);
+	public static void testIsSymmetric() {
 
-    System.out.println("isSymmetric = " + isSymmetric(root));
+		Node root = new Node();
+		root.value = 1;
+		root.left = getNewNode(2);
+		root.right = getNewNode(2);
+		//
+		// root.left.left = getNewNode(6);
+		// root.left.right = getNewNode(4);
+		//
+		// root.right.left = getNewNode(4);
+		// root.right.right = getNewNode(6);
+		//
+		// root.right.right.right = getNewNode(3);
 
-  }
+		System.out.println("isSymmetric = " + isSymmetric(root));
 
-  public static void testLCA() {
-    Node root = new Node();
-    root.value = 1;
+	}
 
-    Node node2 = new Node();
-    root.left = node2;
-    root.left.value = 2;
+	public static void testLCA() {
 
-    Node node3 = new Node();
-    root.right = node3;
-    root.right.value = 3;
+		Node root = new Node();
+		root.value = 1;
 
-    Node node4 = new Node();
-    root.left.left = node4;
-    root.left.left.value = 4;
+		Node node2 = new Node();
+		root.left = node2;
+		root.left.value = 2;
 
-    Node node5 = new Node();
-    root.left.right = node5;
-    root.left.right.value = 5;
+		Node node3 = new Node();
+		root.right = node3;
+		root.right.value = 3;
 
-    Node node6 = new Node();
-    root.right.left = node6;
-    root.right.left.value = 6;
+		Node node4 = new Node();
+		root.left.left = node4;
+		root.left.left.value = 4;
 
-    Node node7 = new Node();
-    root.right.right = node7;
-    root.right.right.value = 7;
+		Node node5 = new Node();
+		root.left.right = node5;
+		root.left.right.value = 5;
 
-    Node node8 = new Node();
-    root.left.left.left = node8;
-    root.left.left.left.value = 8;
-    Node node9 = new Node();
-    root.left.left.right = node9;
-    root.left.left.right.value = 9;
+		Node node6 = new Node();
+		root.right.left = node6;
+		root.right.left.value = 6;
 
-    Node node10 = new Node();
-    root.left.right.left = node10;
-    root.left.right.left.value = 10;
+		Node node7 = new Node();
+		root.right.right = node7;
+		root.right.right.value = 7;
 
-    Node node11 = new Node();
-    root.left.right.right = node11;
-    root.left.right.right.value = 11;
+		Node node8 = new Node();
+		root.left.left.left = node8;
+		root.left.left.left.value = 8;
+		Node node9 = new Node();
+		root.left.left.right = node9;
+		root.left.left.right.value = 9;
 
-    Node node12 = new Node();
-    root.right.left.left = node12;
-    root.right.left.left.value = 12;
+		Node node10 = new Node();
+		root.left.right.left = node10;
+		root.left.right.left.value = 10;
 
-    Node node13 = new Node();
-    root.right.left.right = node13;
-    root.right.left.right.value = 13;
+		Node node11 = new Node();
+		root.left.right.right = node11;
+		root.left.right.right.value = 11;
 
-    // System.out.println("LCA is: " + lowestCommonAncestor(root, node9, node6).value);
-    getShortestPath(root, node2, node3);
-    getShortestPath(root, node5, node6);
-    getShortestPath(root, node8, node12);
+		Node node12 = new Node();
+		root.right.left.left = node12;
+		root.right.left.left.value = 12;
 
-    // System.out.println("LCA 2/3 is: " + lca(root, node2, node3).value);
-    // System.out.println("LCA 4/5 is: " + lca(root, node4, node5).value);
-    // System.out.println("LCA 8/6 is: " + lca(root, node8, node6).value);
-    // System.out.println("LCA 8/7 is: " + lca(root, node8, node7).value);
-    // System.out.println("LCA 8/9 is: " + lca(root, node8, node9).value);
-    // System.out.println("LCA 10/11 is: " + lca(root, node10, node11).value);
-  }
+		Node node13 = new Node();
+		root.right.left.right = node13;
+		root.right.left.right.value = 13;
 
-  public static void traverseBFS(Node node) {
+		// System.out.println("LCA is: " + lowestCommonAncestor(root, node9, node6).value);
+		getShortestPath(root, node2, node3);
+		getShortestPath(root, node5, node6);
+		getShortestPath(root, node8, node12);
 
-    Queue<Node> q = new LinkedList<Node>();
-    q.add(node);
+		// System.out.println("LCA 2/3 is: " + lca(root, node2, node3).value);
+		// System.out.println("LCA 4/5 is: " + lca(root, node4, node5).value);
+		// System.out.println("LCA 8/6 is: " + lca(root, node8, node6).value);
+		// System.out.println("LCA 8/7 is: " + lca(root, node8, node7).value);
+		// System.out.println("LCA 8/9 is: " + lca(root, node8, node9).value);
+		// System.out.println("LCA 10/11 is: " + lca(root, node10, node11).value);
+	}
 
-    while (!q.isEmpty()) {
+	public static void traverseBFS(Node node) {
 
-      Node n = q.remove();
+		Queue<Node> q = new LinkedList<Node>();
+		q.add(node);
 
-      if (n != null) {
-        System.out.print(n.value + " ");
-        q.add(n.left);
-        q.add(n.right);
-      }
-    }
+		while (!q.isEmpty()) {
 
-  }
+			Node n = q.remove();
 
-  public static void traverseTreeSpirally(Node root) {
+			if (n != null) {
+				System.out.print(n.value + " ");
+				q.add(n.left);
+				q.add(n.right);
+			}
+		}
 
-    // Queue<Node> q = new LinkedList<Node>();
+	}
 
-    if (root == null) {
-      return;
-    }
+	public static void traverseTreePerLevel(Node root) {
 
-    boolean goRight = true;
-    Stack<Node> s1 = new Stack<>();
-    Stack<Node> s2 = new Stack<>();
+		Queue<Node> q1 = new LinkedList<Node>();
+		Queue<Node> q2 = new LinkedList<Node>();
 
-    s1.push(root);
+		boolean oddLevel = true;
 
-    while (!s1.isEmpty() || !s2.isEmpty()) {
+		q1.add(root);
 
-      Node node = null;
+		Queue<Node> qPtr1 = null;
+		Queue<Node> qPtr2 = null;
 
-      if (goRight) {
-        node = s1.pop();
-        if (node.left != null) {
-          s2.push(node.left);
-        }
-        if (node.right != null) {
-          s2.push(node.right);
-        }
-      }
-      else {
-        node = s2.pop();
-        if (node.right != null) {
-          s1.push(node.right);
-        }
-        if (node.left != null) {
-          s1.push(node.left);
-        }
-      }
+		int level = 1;
 
-      System.out.print(node.value + " ");
+		while (!q1.isEmpty() || !q2.isEmpty()) {
+			System.out.println("\nLevel " + level++ + ":");
 
-      if (s1.isEmpty()) {
-        goRight = false;
-      }
-      else if (s2.isEmpty()) {
-        goRight = true;
-      }
-    }
+			if (oddLevel) {
+				qPtr1 = q1;
+				qPtr2 = q2;
+			}
+			else {
+				qPtr1 = q2;
+				qPtr2 = q1;
+			}
 
-  }
+			while (!qPtr1.isEmpty()) {
+				Node node = qPtr1.remove();
+				if (node.left != null) {
+					qPtr2.add(node.left);
+				}
+				if (node.right != null) {
+					qPtr2.add(node.right);
+				}
+				System.out.print(node.value + " ");
+			}
 
-  private static Node copyTree(Node orig, Node copy) {
+			// we're done traversing this level, time to print next level
+			oddLevel = !oddLevel;
 
-    if (orig == null) {
-      return null;
-    }
+		}
 
-    copy.value = orig.value;
+	}
 
-    if (orig.left != null) {
-      copy.left = new Node();
-      copyTree(orig.left, copy.left);
-    }
+	public static void traverseTreeSpirally(Node root) {
 
-    if (orig.right != null) {
-      copy.right = new Node();
-      copyTree(orig.right, copy.right);
-    }
+		if (root == null) {
+			return;
+		}
 
-    return copy;
+		boolean goRight = true;
+		Stack<Node> s1 = new Stack<>();
+		Stack<Node> s2 = new Stack<>();
 
-  }
+		s1.push(root);
 
-  private static Node copyTree2(Node orig) {
+		while (!s1.isEmpty() || !s2.isEmpty()) {
 
-    if (orig == null) {
-      return null;
-    }
+			Node node = null;
 
-    Node copy = new Node();
-    copy.value = orig.value;
+			if (goRight) {
+				node = s1.pop();
+				if (node.left != null) {
+					s2.push(node.left);
+				}
+				if (node.right != null) {
+					s2.push(node.right);
+				}
+			}
+			else {
+				node = s2.pop();
+				if (node.right != null) {
+					s1.push(node.right);
+				}
+				if (node.left != null) {
+					s1.push(node.left);
+				}
+			}
 
-    copy.left = copyTree2(orig.left);
-    copy.right = copyTree2(orig.right);
+			System.out.print(node.value + " ");
 
-    return copy;
+			if (s1.isEmpty()) {
+				goRight = false;
+			}
+			else if (s2.isEmpty()) {
+				goRight = true;
+			}
+		}
 
-  }
+	}
 
-  private static Node createTreeForTraversal() {
-    Node root = new Node();
-    root.value = 1;
+	private static Node copyTree(Node orig, Node copy) {
 
-    Node node2 = new Node();
-    root.left = node2;
-    root.left.value = 2;
+		if (orig == null) {
+			return null;
+		}
 
-    Node node3 = new Node();
-    root.right = node3;
-    root.right.value = 3;
+		copy.value = orig.value;
 
-    Node node4 = new Node();
-    root.left.left = node4;
-    root.left.left.value = 4;
+		if (orig.left != null) {
+			copy.left = new Node();
+			copyTree(orig.left, copy.left);
+		}
 
-    Node node5 = new Node();
-    root.left.right = node5;
-    root.left.right.value = 5;
+		if (orig.right != null) {
+			copy.right = new Node();
+			copyTree(orig.right, copy.right);
+		}
 
-    Node node6 = new Node();
-    root.right.left = node6;
-    root.right.left.value = 6;
+		return copy;
 
-    Node node7 = new Node();
-    root.right.right = node7;
-    root.right.right.value = 7;
+	}
 
-    Node node8 = new Node();
-    root.left.left.left = node8;
-    root.left.left.left.value = 8;
-    Node node9 = new Node();
-    root.left.left.right = node9;
-    root.left.left.right.value = 9;
+	private static Node copyTree2(Node orig) {
 
-    Node node10 = new Node();
-    root.left.right.left = node10;
-    root.left.right.left.value = 10;
+		if (orig == null) {
+			return null;
+		}
 
-    Node node11 = new Node();
-    root.left.right.right = node11;
-    root.left.right.right.value = 11;
+		Node copy = new Node();
+		copy.value = orig.value;
 
-    Node node12 = new Node();
-    root.right.left.left = node12;
-    root.right.left.left.value = 12;
+		copy.left = copyTree2(orig.left);
+		copy.right = copyTree2(orig.right);
 
-    Node node13 = new Node();
-    root.right.left.right = node13;
-    root.right.left.right.value = 13;
+		return copy;
 
-    return root;
-  }
+	}
 
-  private static Node getNewNode(int value) {
-    Node node = new Node();
-    node.value = value;
-    return node;
-  }
+	private static Node createTreeForTraversal() {
 
-  private static Node getShortestPath(Node root, Node target, Stack<Node> stack) {
+		Node root = new Node();
+		root.value = 1;
 
-    if (root == null) {
-      return null;
-    }
+		Node node2 = new Node();
+		root.left = node2;
+		root.left.value = 2;
 
-    if (root.value == target.value) {
-      return root;
-    }
-    stack.push(root);
+		Node node3 = new Node();
+		root.right = node3;
+		root.right.value = 3;
 
-    Node left = getShortestPath(root.left, target, stack);
-    Node right = getShortestPath(root.right, target, stack);
+		Node node4 = new Node();
+		root.left.left = node4;
+		root.left.left.value = 4;
 
-    if (left == null && right == null) {
-      if (!stack.isEmpty()) stack.pop();
-    }
+		Node node5 = new Node();
+		root.left.right = node5;
+		root.left.right.value = 5;
 
-    return left != null ? left : right;
-  }
+		Node node6 = new Node();
+		root.right.left = node6;
+		root.right.left.value = 6;
+
+		Node node7 = new Node();
+		root.right.right = node7;
+		root.right.right.value = 7;
+
+		Node node8 = new Node();
+		root.left.left.left = node8;
+		root.left.left.left.value = 8;
+		Node node9 = new Node();
+		root.left.left.right = node9;
+		root.left.left.right.value = 9;
+
+		Node node10 = new Node();
+		root.left.right.left = node10;
+		root.left.right.left.value = 10;
+
+		Node node11 = new Node();
+		root.left.right.right = node11;
+		root.left.right.right.value = 11;
+
+		Node node12 = new Node();
+		root.right.left.left = node12;
+		root.right.left.left.value = 12;
+
+		Node node13 = new Node();
+		root.right.left.right = node13;
+		root.right.left.right.value = 13;
+
+		return root;
+	}
+
+	private static Node getNewNode(int value) {
+
+		Node node = new Node();
+		node.value = value;
+		return node;
+	}
+
+	private static Node getShortestPath(Node root, Node target, Stack<Node> stack) {
+
+		if (root == null) {
+			return null;
+		}
+
+		if (root.value == target.value) {
+			return root;
+		}
+		stack.push(root);
+
+		Node left = getShortestPath(root.left, target, stack);
+		Node right = getShortestPath(root.right, target, stack);
+
+		if (left == null && right == null) {
+			if (!stack.isEmpty())
+				stack.pop();
+		}
+
+		return left != null ? left : right;
+	}
 }
