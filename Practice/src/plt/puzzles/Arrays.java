@@ -4,9 +4,10 @@ public class Arrays {
 
 	public static void main(String[] args) {
 
-		spiralPrintNxNArray();
+		// spiralPrintNxNArray();
+		// test_findIndexOfItem();
 
-		test_findIndexOfItem();
+		test_rotateNxN_Matrix();
 	}
 
 	public static void spiralPrintNxNArray() {
@@ -223,4 +224,97 @@ public class Arrays {
 		return index;
 	}
 
+	public static void test_rotateNxN_Matrix() {
+
+		int arrayNxN[][] = {//
+		{ 1, 2 }, //
+		{ 3, 4 }, //
+		};
+
+		// int arrayNxN[][] = {//
+		// { 1, 2, 3, 4, 5 }, //
+		// { 6, 7, 8, 9, 10 }, //
+		// { 11, 12, 13, 14, 15 }, //
+		// { 16, 17, 18, 19, 20 }, //
+		// { 21, 22, 23, 24, 25 }, //
+		// };
+
+		// int arrayNxN[][] = {//
+		// { 1, 2, 3, 4 }, //
+		// { 5, 6, 7, 8 }, //
+		// { 9, 10, 11, 12 }, //
+		// { 13, 14, 15, 16 }, //
+		// };
+
+		System.out.println("Before Rotate");
+		for (int i = 0; i < arrayNxN.length; i++) {
+			System.out.println("");
+			for (int j = 0; j < arrayNxN[0].length; j++) {
+				System.out.print(arrayNxN[i][j] + "\t");
+			}
+		}
+
+		rotate_NxN_Matrix(arrayNxN, arrayNxN.length);
+
+		System.out.println("\nAfter Rotate");
+		for (int i = 0; i < arrayNxN.length; i++) {
+			System.out.println("");
+			for (int j = 0; j < arrayNxN[0].length; j++) {
+				System.out.print(arrayNxN[i][j] + "\t");
+			}
+		}
+
+	}
+
+	public static void rotate_NxN_Matrix(int[][] arr, int n) {
+
+		int temp = 0;
+
+		int x = 0, prevX = 0, startX = 0;
+		int y = 0, prevY = 0, startY = 0;
+
+		int adjust = 0;
+		if (n % 2 == 0) {
+			adjust = 1;
+		}
+
+		// how many circular loops
+		for (int i = (n / 2); i > 0; i--) {
+
+			for (int j = 0; j < (i * 2) - adjust; j++) {	// how many items to move
+				x = prevX = startX;
+				y = prevY = startY + j;
+
+				for (int k = 0; k < 3; k++) {	// 4 sides to move
+					switch (k) {
+					case 0:
+						temp = arr[x][y];
+						y = y + ((i * 2) - adjust - j);
+						x = x + j;
+						break;
+					case 1:
+						y = y - j;
+						x = x + ((i * 2) - adjust - j);
+						break;
+					case 2:
+						y = y - ((i * 2) - adjust - j);
+						x = x - j;
+						break;
+					}
+
+					arr[prevX][prevY] = arr[x][y];
+					prevX = x;
+					prevY = y;
+
+				}
+				arr[x][y] = temp;
+
+			}
+
+			startX++;
+			startY++;
+
+		}
+
+	}
 }
