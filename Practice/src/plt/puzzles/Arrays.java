@@ -226,18 +226,18 @@ public class Arrays {
 
 	public static void test_rotateNxN_Matrix() {
 
-		int arrayNxN[][] = {//
-		{ 1, 2 }, //
-		{ 3, 4 }, //
-		};
-
 		// int arrayNxN[][] = {//
-		// { 1, 2, 3, 4, 5 }, //
-		// { 6, 7, 8, 9, 10 }, //
-		// { 11, 12, 13, 14, 15 }, //
-		// { 16, 17, 18, 19, 20 }, //
-		// { 21, 22, 23, 24, 25 }, //
+		// { 1, 2 }, //
+		// { 3, 4 }, //
 		// };
+
+		int arrayNxN[][] = {//
+		{ 1, 2, 3, 4, 5 }, 		// 0,0 0,1 0,2 0,3 0,4
+		{ 6, 7, 8, 9, 10 }, 	// 1,0 1,1 1,2 1,3 1,4
+		{ 11, 12, 13, 14, 15 }, // 2,0 2,1 2,2 2,3 2,4
+		{ 16, 17, 18, 19, 20 }, // 3.0 3,1 3,2 3,3 3,4
+		{ 21, 22, 23, 24, 25 }, // 4,0 4,1 4,2 4,3 4,4
+		};
 
 		// int arrayNxN[][] = {//
 		// { 1, 2, 3, 4 }, //
@@ -254,7 +254,9 @@ public class Arrays {
 			}
 		}
 
-		rotate_NxN_Matrix(arrayNxN, arrayNxN.length);
+		// rotate_NxN_Matrix(arrayNxN, arrayNxN.length);
+
+		rotate_NxN_Matrix_ctci(arrayNxN, arrayNxN.length);
 
 		System.out.println("\nAfter Rotate");
 		for (int i = 0; i < arrayNxN.length; i++) {
@@ -315,6 +317,37 @@ public class Arrays {
 			startY++;
 
 		}
-
 	}
+
+	public static void rotate_NxN_Matrix_ctci(int[][] matrix, int n) {
+
+		for (int layer = 0; layer < n / 2; ++layer) {
+
+			int first = layer;
+			int last = n - 1 - layer;
+			System.out.println("");
+			for (int i = first; i < last; ++i) {
+				int offset = i - first;
+
+				// System.out.println("Copy " + first + "," + i + " to temp");
+				// System.out.println("Copy " + (last - offset) + "," + first + " to " + first + "," + i);
+				// System.out.println("Copy " + last + "," + (last - offset) + " to " + (last - offset) + ","
+				// + first);
+				// System.out.println("Copy " + i + "," + last + " to " + last + "," + (last - offset));
+				// System.out.println("Copy temp to " + i + "," + last);
+
+				int top = matrix[first][i];
+
+				matrix[first][i] = matrix[last - offset][first];
+
+				matrix[last - offset][first] = matrix[last][last - offset];
+
+				matrix[last][last - offset] = matrix[i][last];
+
+				matrix[i][last] = top;
+
+			}
+		}
+	}
+
 }

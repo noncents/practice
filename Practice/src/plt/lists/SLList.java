@@ -195,7 +195,5 @@ public class SLList {
 
 		return head;
 	}
-	
-	public static Node findLoop
 
 }
