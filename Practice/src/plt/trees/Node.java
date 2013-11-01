@@ -2,9 +2,9 @@ package plt.trees;
 
 public class Node {
 
-	Node right;
-	Node left;
-	int value;
+	public Node right;
+	public Node left;
+	public int value;
 
 	public Node() {
 
@@ -20,5 +20,10 @@ public class Node {
 		this.value = value;
 		this.left = left;
 		this.right = right;
+	}
+
+	public Node(int value) {
+
+		this.value = value;
 	}
 }
