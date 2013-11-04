@@ -16,7 +16,7 @@ public class BSTrees {
 		// int[] bstTree1 = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20
 		// };
 
-		Node node = createBSTree(bstTree1, 0, bstTree1.length - 1);
+		TreeNode node = createBSTree(bstTree1, 0, bstTree1.length - 1);
 
 		// System.out.println("\nIn Order >> ");
 		// traverseInOrder(node);
@@ -25,12 +25,12 @@ public class BSTrees {
 		System.out.println("\nPre Order Iterative >> ");
 		traversePreOrder_Iterative(node);
 
-		Node mirrorNode = mirrorTree_Iterative(node);
+		TreeNode mirrorNode = mirrorTree_Iterative(node);
 		System.out.println("\nPre Order Iterative of Mirror >> ");
 		traversePreOrder_Iterative(mirrorNode);
 
 		// now try to restore it back -- mirror the mirrored tree
-		Node restoredNode = mirrorTree_Recurse(mirrorNode);
+		TreeNode restoredNode = mirrorTree_Recurse(mirrorNode);
 		System.out.println("\nPre Order Iterative of Mirrored Mirror >> ");
 		traversePreOrder_Iterative(restoredNode);
 
@@ -48,13 +48,13 @@ public class BSTrees {
 
 	}
 
-	public static Node createBSTree(int[] values, int start, int end) {
+	public static TreeNode createBSTree(int[] values, int start, int end) {
 
 		logger.log("S:" + start + " E:" + end);
 
 		if (start == end) {
 			logger.log("   value[" + end + "] = " + values[end]);
-			return new Node(values[end], null, null);
+			return new TreeNode(values[end], null, null);
 		}
 
 		int mid = start + (end - start + 1) / 2;
@@ -62,7 +62,7 @@ public class BSTrees {
 		logger.log("S:" + start + " M:" + mid + " E:" + end);
 		logger.log("   value[" + mid + "] = " + values[mid]);
 
-		Node node = new Node();
+		TreeNode node = new TreeNode();
 		node.value = values[mid];
 		node.left = createBSTree(values, start, mid - 1);
 		if (mid < end) {
@@ -79,7 +79,7 @@ public class BSTrees {
 	 *		inorder(node.right)
 	 */
 
-	public static void traverseInOrder(Node node) {
+	public static void traverseInOrder(TreeNode node) {
 
 		if (node == null) {
 			return;
@@ -96,7 +96,7 @@ public class BSTrees {
 	 *		preorder(node.left) 
 	 *		preorder(node.right)
 	 */
-	public static void traversePreOrder(Node node) {
+	public static void traversePreOrder(TreeNode node) {
 
 		if (node == null) {
 			return;
@@ -107,13 +107,13 @@ public class BSTrees {
 		traversePreOrder(node.right);
 	}
 
-	public static void traversePreOrder_Iterative(Node node) {
+	public static void traversePreOrder_Iterative(TreeNode node) {
 
 		if (node == null) {
 			return;
 		}
 
-		Stack<Node> stack = new Stack<Node>();
+		Stack<TreeNode> stack = new Stack<TreeNode>();
 
 		while (!stack.isEmpty() || node != null) {
 
@@ -132,17 +132,17 @@ public class BSTrees {
 
 	}
 
-	public static Node mirrorTree_Iterative(Node node) {
+	public static TreeNode mirrorTree_Iterative(TreeNode node) {
 
 		if (node == null) {
 			return null;
 		}
 
-		Node mirrorNode = new Node();
-		Node mNode = mirrorNode;
+		TreeNode mirrorNode = new TreeNode();
+		TreeNode mNode = mirrorNode;
 
-		Stack<Node> stack = new Stack<Node>();
-		Stack<Node> mStack = new Stack<Node>();
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		Stack<TreeNode> mStack = new Stack<TreeNode>();
 
 		while (!stack.isEmpty() || node != null) {
 
@@ -153,13 +153,13 @@ public class BSTrees {
 				if (node.right != null) {
 					stack.push(node.right);
 
-					mNode.left = new Node();
+					mNode.left = new TreeNode();
 					mStack.push(mNode.left);
 				}
 				node = node.left;
 
 				if (node != null) {
-					mNode.right = new Node();
+					mNode.right = new TreeNode();
 					mNode = mNode.right;
 				}
 				else {
@@ -177,13 +177,13 @@ public class BSTrees {
 
 	}
 
-	public static Node mirrorTree_Recurse(Node node) {
+	public static TreeNode mirrorTree_Recurse(TreeNode node) {
 
 		if (node == null) {
 			return null;
 		}
 
-		Node mirrorNode = new Node();
+		TreeNode mirrorNode = new TreeNode();
 
 		mirrorNode.value = node.value;
 		mirrorNode.left = mirrorTree_Recurse(node.right);
@@ -199,19 +199,19 @@ public class BSTrees {
 	 * @param node
 	 * @return
 	 */
-	public static Node mirrorTree_BFS(Node node) {
+	public static TreeNode mirrorTree_BFS(TreeNode node) {
 
 		if (node == null) {
 			return null;
 		}
 
-		Queue<Node> q = new LinkedList<Node>();
+		Queue<TreeNode> q = new LinkedList<TreeNode>();
 		q.add(node);
 
 		while (!q.isEmpty()) {
-			Node qNode = q.remove();
+			TreeNode qNode = q.remove();
 
-			Node temp = qNode.left;
+			TreeNode temp = qNode.left;
 			qNode.left = qNode.right;
 			qNode.right = temp;
 
@@ -235,7 +235,7 @@ public class BSTrees {
 			postorder(node.right)
 			visit(node)
 	 */
-	public static void traversePostOrder(Node node) {
+	public static void traversePostOrder(TreeNode node) {
 
 		if (node == null) {
 			return;
@@ -252,17 +252,17 @@ public class BSTrees {
 	 * @param node
 	 * @param sum
 	 */
-	public static String searchAddends(Node node, int sum) {
+	public static String searchAddends(TreeNode node, int sum) {
 
 		if (node == null) {
 			return "Are you stooopid?";
 		}
 
-		Stack<Node> leftStack = new Stack<Node>();
-		Stack<Node> rightStack = new Stack<Node>();
+		Stack<TreeNode> leftStack = new Stack<TreeNode>();
+		Stack<TreeNode> rightStack = new Stack<TreeNode>();
 
-		Node left = node;
-		Node right = node;
+		TreeNode left = node;
+		TreeNode right = node;
 
 		// get the leftmost node
 		while (left.left != null) {

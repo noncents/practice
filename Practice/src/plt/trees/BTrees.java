@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class BTrees {
 
-	public static Node copyTree(Node orig) {
+	public static TreeNode copyTree(TreeNode orig) {
 
 		if (orig == null) {
 			return null;
@@ -20,12 +20,12 @@ public class BTrees {
 
 	}
 
-	public static Stack<Node> getShortestPath(Node root, Node a, Node b) {
+	public static Stack<TreeNode> getShortestPath(TreeNode root, TreeNode a, TreeNode b) {
 
-		Node lca = lca(root, a, b);
+		TreeNode lca = lca(root, a, b);
 
-		Stack<Node> stack1 = new Stack<Node>();
-		Stack<Node> stack2 = new Stack<Node>();
+		Stack<TreeNode> stack1 = new Stack<TreeNode>();
+		Stack<TreeNode> stack2 = new Stack<TreeNode>();
 
 		stack1.push(lca);
 
@@ -46,7 +46,7 @@ public class BTrees {
 		return stack1;
 	}
 
-	public static boolean isSymmetric(Node root) {
+	public static boolean isSymmetric(TreeNode root) {
 
 		if (root == null) {
 			return false;
@@ -55,7 +55,7 @@ public class BTrees {
 		return isSymmetric(root.left, root.right);
 	}
 
-	public static boolean isSymmetric(Node left, Node right) {
+	public static boolean isSymmetric(TreeNode left, TreeNode right) {
 
 		if (left == null && right == null) {
 			return true;
@@ -69,7 +69,7 @@ public class BTrees {
 
 	}
 
-	public static Node lca(Node root, Node a, Node b) {
+	public static TreeNode lca(TreeNode root, TreeNode a, TreeNode b) {
 
 		if (root == null) {
 			return null;
@@ -79,8 +79,8 @@ public class BTrees {
 			return root;
 		}
 
-		Node left = lca(root.left, a, b);
-		Node right = lca(root.right, a, b);
+		TreeNode left = lca(root.left, a, b);
+		TreeNode right = lca(root.right, a, b);
 
 		if (left != null && right != null) {
 			return root;
@@ -93,7 +93,7 @@ public class BTrees {
 
 	}
 
-	public static Node lowestCommonAncestor(Node root, Node a, Node b) {
+	public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode a, TreeNode b) {
 
 		System.out.println("root value = " + (root == null ? "null" : root.value));
 
@@ -106,8 +106,8 @@ public class BTrees {
 			return root;
 		}
 
-		Node l = lowestCommonAncestor(root.left, a, b);
-		Node r = lowestCommonAncestor(root.right, a, b);
+		TreeNode l = lowestCommonAncestor(root.left, a, b);
+		TreeNode r = lowestCommonAncestor(root.right, a, b);
 
 		if (l != null && r != null) {
 			System.out.println("return: " + root.value);
@@ -137,7 +137,7 @@ public class BTrees {
 
 	public static void testBFS() {
 
-		Node root = createTreeForTraversal();
+		TreeNode root = createTreeForTraversal();
 
 		// traverseBFS(root);
 		System.out.println("Test traverseTreeSpirally start >");
@@ -151,14 +151,14 @@ public class BTrees {
 
 	public static void testCopyTree() {
 
-		Node node = createTreeForTraversal();
+		TreeNode node = createTreeForTraversal();
 		traverseBFS(copyTree(node));
 
 	}
 
 	public static void testIsSymmetric() {
 
-		Node root = new Node();
+		TreeNode root = new TreeNode();
 		root.value = 1;
 		root.left = getNewNode(2);
 		root.right = getNewNode(2);
@@ -177,53 +177,53 @@ public class BTrees {
 
 	public static void testLCA() {
 
-		Node root = new Node();
+		TreeNode root = new TreeNode();
 		root.value = 1;
 
-		Node node2 = new Node();
+		TreeNode node2 = new TreeNode();
 		root.left = node2;
 		root.left.value = 2;
 
-		Node node3 = new Node();
+		TreeNode node3 = new TreeNode();
 		root.right = node3;
 		root.right.value = 3;
 
-		Node node4 = new Node();
+		TreeNode node4 = new TreeNode();
 		root.left.left = node4;
 		root.left.left.value = 4;
 
-		Node node5 = new Node();
+		TreeNode node5 = new TreeNode();
 		root.left.right = node5;
 		root.left.right.value = 5;
 
-		Node node6 = new Node();
+		TreeNode node6 = new TreeNode();
 		root.right.left = node6;
 		root.right.left.value = 6;
 
-		Node node7 = new Node();
+		TreeNode node7 = new TreeNode();
 		root.right.right = node7;
 		root.right.right.value = 7;
 
-		Node node8 = new Node();
+		TreeNode node8 = new TreeNode();
 		root.left.left.left = node8;
 		root.left.left.left.value = 8;
-		Node node9 = new Node();
+		TreeNode node9 = new TreeNode();
 		root.left.left.right = node9;
 		root.left.left.right.value = 9;
 
-		Node node10 = new Node();
+		TreeNode node10 = new TreeNode();
 		root.left.right.left = node10;
 		root.left.right.left.value = 10;
 
-		Node node11 = new Node();
+		TreeNode node11 = new TreeNode();
 		root.left.right.right = node11;
 		root.left.right.right.value = 11;
 
-		Node node12 = new Node();
+		TreeNode node12 = new TreeNode();
 		root.right.left.left = node12;
 		root.right.left.left.value = 12;
 
-		Node node13 = new Node();
+		TreeNode node13 = new TreeNode();
 		root.right.left.right = node13;
 		root.right.left.right.value = 13;
 
@@ -240,14 +240,14 @@ public class BTrees {
 		// System.out.println("LCA 10/11 is: " + lca(root, node10, node11).value);
 	}
 
-	public static void traverseBFS(Node node) {
+	public static void traverseBFS(TreeNode node) {
 
-		Queue<Node> q = new LinkedList<Node>();
+		Queue<TreeNode> q = new LinkedList<TreeNode>();
 		q.add(node);
 
 		while (!q.isEmpty()) {
 
-			Node n = q.remove();
+			TreeNode n = q.remove();
 
 			if (n != null) {
 				System.out.print(n.value + " ");
@@ -258,17 +258,17 @@ public class BTrees {
 
 	}
 
-	public static void traverseTreePerLevel(Node root) {
+	public static void traverseTreePerLevel(TreeNode root) {
 
-		Queue<Node> q1 = new LinkedList<Node>();
-		Queue<Node> q2 = new LinkedList<Node>();
+		Queue<TreeNode> q1 = new LinkedList<TreeNode>();
+		Queue<TreeNode> q2 = new LinkedList<TreeNode>();
 
 		boolean oddLevel = true;
 
 		q1.add(root);
 
-		Queue<Node> qPtr1 = null;
-		Queue<Node> qPtr2 = null;
+		Queue<TreeNode> qPtr1 = null;
+		Queue<TreeNode> qPtr2 = null;
 
 		int level = 1;
 
@@ -285,7 +285,7 @@ public class BTrees {
 			}
 
 			while (!qPtr1.isEmpty()) {
-				Node node = qPtr1.remove();
+				TreeNode node = qPtr1.remove();
 				if (node.left != null) {
 					qPtr2.add(node.left);
 				}
@@ -302,21 +302,21 @@ public class BTrees {
 
 	}
 
-	public static void traverseTreeSpirally(Node root) {
+	public static void traverseTreeSpirally(TreeNode root) {
 
 		if (root == null) {
 			return;
 		}
 
 		boolean goRight = true;
-		Stack<Node> s1 = new Stack<>();
-		Stack<Node> s2 = new Stack<>();
+		Stack<TreeNode> s1 = new Stack<>();
+		Stack<TreeNode> s2 = new Stack<>();
 
 		s1.push(root);
 
 		while (!s1.isEmpty() || !s2.isEmpty()) {
 
-			Node node = null;
+			TreeNode node = null;
 
 			if (goRight) {
 				node = s1.pop();
@@ -349,7 +349,7 @@ public class BTrees {
 
 	}
 
-	private static Node copyTree(Node orig, Node copy) {
+	private static TreeNode copyTree(TreeNode orig, TreeNode copy) {
 
 		if (orig == null) {
 			return null;
@@ -358,12 +358,12 @@ public class BTrees {
 		copy.value = orig.value;
 
 		if (orig.left != null) {
-			copy.left = new Node();
+			copy.left = new TreeNode();
 			copyTree(orig.left, copy.left);
 		}
 
 		if (orig.right != null) {
-			copy.right = new Node();
+			copy.right = new TreeNode();
 			copyTree(orig.right, copy.right);
 		}
 
@@ -371,13 +371,13 @@ public class BTrees {
 
 	}
 
-	private static Node copyTree2(Node orig) {
+	private static TreeNode copyTree2(TreeNode orig) {
 
 		if (orig == null) {
 			return null;
 		}
 
-		Node copy = new Node();
+		TreeNode copy = new TreeNode();
 		copy.value = orig.value;
 
 		copy.left = copyTree2(orig.left);
@@ -387,69 +387,69 @@ public class BTrees {
 
 	}
 
-	private static Node createTreeForTraversal() {
+	private static TreeNode createTreeForTraversal() {
 
-		Node root = new Node();
+		TreeNode root = new TreeNode();
 		root.value = 1;
 
-		Node node2 = new Node();
+		TreeNode node2 = new TreeNode();
 		root.left = node2;
 		root.left.value = 2;
 
-		Node node3 = new Node();
+		TreeNode node3 = new TreeNode();
 		root.right = node3;
 		root.right.value = 3;
 
-		Node node4 = new Node();
+		TreeNode node4 = new TreeNode();
 		root.left.left = node4;
 		root.left.left.value = 4;
 
-		Node node5 = new Node();
+		TreeNode node5 = new TreeNode();
 		root.left.right = node5;
 		root.left.right.value = 5;
 
-		Node node6 = new Node();
+		TreeNode node6 = new TreeNode();
 		root.right.left = node6;
 		root.right.left.value = 6;
 
-		Node node7 = new Node();
+		TreeNode node7 = new TreeNode();
 		root.right.right = node7;
 		root.right.right.value = 7;
 
-		Node node8 = new Node();
+		TreeNode node8 = new TreeNode();
 		root.left.left.left = node8;
 		root.left.left.left.value = 8;
-		Node node9 = new Node();
+		TreeNode node9 = new TreeNode();
 		root.left.left.right = node9;
 		root.left.left.right.value = 9;
 
-		Node node10 = new Node();
+		TreeNode node10 = new TreeNode();
 		root.left.right.left = node10;
 		root.left.right.left.value = 10;
 
-		Node node11 = new Node();
+		TreeNode node11 = new TreeNode();
 		root.left.right.right = node11;
 		root.left.right.right.value = 11;
 
-		Node node12 = new Node();
+		TreeNode node12 = new TreeNode();
 		root.right.left.left = node12;
 		root.right.left.left.value = 12;
 
-		Node node13 = new Node();
+		TreeNode node13 = new TreeNode();
 		root.right.left.right = node13;
 		root.right.left.right.value = 13;
 
 		return root;
 	}
 
-	private static Node getNewNode(int value) {
+	private static TreeNode getNewNode(int value) {
 
-		Node node = new Node();
+		TreeNode node = new TreeNode();
 		node.value = value;
 		return node;
 	}
 
-	private static Node getShortestPath(Node root, Node target, Stack<Node> stack) {
+	private static TreeNode getShortestPath(TreeNode root, TreeNode target, Stack<TreeNode> stack) {
 
 		if (root == null) {
 			return null;
@@ -460,8 +460,8 @@ public class BTrees {
 		}
 		stack.push(root);
 
-		Node left = getShortestPath(root.left, target, stack);
-		Node right = getShortestPath(root.right, target, stack);
+		TreeNode left = getShortestPath(root.left, target, stack);
+		TreeNode right = getShortestPath(root.right, target, stack);
 
 		if (left == null && right == null) {
 			if (!stack.isEmpty())

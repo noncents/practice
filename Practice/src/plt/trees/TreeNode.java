@@ -1,12 +1,12 @@
 package plt.trees;
 
-public class Node {
+public class TreeNode {
 
-	public Node right;
-	public Node left;
+	public TreeNode right;
+	public TreeNode left;
 	public int value;
 
-	public Node() {
+	public TreeNode() {
 
 	}
 
@@ -15,14 +15,14 @@ public class Node {
 		return String.valueOf(value);
 	}
 
-	public Node(int value, Node left, Node right) {
+	public TreeNode(int value, TreeNode left, TreeNode right) {
 
 		this.value = value;
 		this.left = left;
 		this.right = right;
 	}
 
-	public Node(int value) {
+	public TreeNode(int value) {
 
 		this.value = value;
 	}
