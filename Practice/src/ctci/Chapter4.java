@@ -221,8 +221,32 @@ public class Chapter4 {
 	 * @param a
 	 * @param b
 	 */
-	public static void Q4_7_findLCA(TreeNode node) {
+	public static TreeNode Q4_7_findLCA(TreeNode node, TreeNode n1, TreeNode n2) {
 
+		// this check is done in findNode()
+		// if (node == null) {
+		// return null;
+		// }
+
+		if (findNode(node.left, n1) && findNode(node.left, n2)) {
+			return Q4_7_findLCA(node.left, n1, n2);
+		}
+		if (findNode(node.right, n1) && findNode(node.right, n2)) {
+			return Q4_7_findLCA(node.right, n1, n2);
+		}
+		return node;
+	}
+
+	private static boolean findNode(TreeNode node, TreeNode n) {
+
+		if (node == null) {
+			return false;
+		}
+		if (node == n) {
+			return true;
+		}
+
+		return findNode(node.left, n) || findNode(node.right, n);
 	}
 
 	// TODO:
@@ -234,7 +258,45 @@ public class Chapter4 {
 	 * @param a
 	 * @param b
 	 */
-	public static void Q4_8_isSubtree(TreeNode node, TreeNode subTreeNode) {
+	public static boolean Q4_8_containsSubtree(TreeNode node, TreeNode subTreeNode) {
+
+		if (subTreeNode == null) {
+			return false;	// null subtree will never match anything
+		}
+
+		return isSubtree(node, subTreeNode);
+
+	}
+
+	private static boolean isSubtree(TreeNode n1, TreeNode n2) {
+
+		if (n1 == null) {
+			return false;	// subtree will never be found in a null tree
+		}
+
+		if (n1.value == n2.value) {
+			if (matchTree(n1, n2))
+				return true;
+		}
+		// didnt match, need to drill down
+		return isSubtree(n1.left, n2) || isSubtree(n1.right, n2);
+	}
+
+	private static boolean matchTree(TreeNode n1, TreeNode n2) {
+
+		if (n1 == null && n2 == null) {
+			return true;
+		}
+		// only 1 is null, of course they dont match
+		if (n1 == null || n2 == null) {
+			return false;
+		}
+
+		if (n1.value != n2.value) {
+			return false;
+		}
+
+		return matchTree(n1.left, n2.left) && matchTree(n1.right, n2.right);
 
 	}
 
