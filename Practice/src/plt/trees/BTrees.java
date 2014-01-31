@@ -75,17 +75,22 @@ public class BTrees {
 			return null;
 		}
 
-		if (root.value == a.value || root.value == b.value) {
+		// if we have a match, no need to continue further
+		if (root.equals(a) || root.equals(b)) {
 			return root;
 		}
 
 		TreeNode left = lca(root.left, a, b);
 		TreeNode right = lca(root.right, a, b);
 
+		// if both are not null, meaning we found them separately on each side
+		// so this must be the LCA
 		if (left != null && right != null) {
 			return root;
 		}
 
+		// if only 1 side is not null, then they must have been found on that side only
+		// or we could end up with both sides null, meaning not found on both sides.
 		if (left != null)
 			return left;
 
