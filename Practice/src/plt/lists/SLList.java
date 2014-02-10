@@ -11,6 +11,7 @@ public class SLList {
 		// traverseList(reverseList(convertArrToList(new int[] { 1, 2 })));
 		// traverseList(reverseList(convertArrToList(new int[] { 1, 2, 3, 4, 5 })));
 		// traverseList(reverseList(convertArrToList(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })));
+
 		//
 		// traverseList(removeMidElement(convertArrToList(new int[] { 1 })));
 		// traverseList(removeMidElement(convertArrToList(new int[] { 1, 2 })));
@@ -20,7 +21,7 @@ public class SLList {
 		// traverseList(removeMidElement(convertArrToList(new int[] { 1, 2, 3, 4, 5, 6 })));
 		// traverseList(removeMidElement(convertArrToList(new int[] { 1, 2, 3, 4, 5, 6, 7 })));
 
-		testAdd2Nums();
+		// testAdd2Nums();
 
 	}
 
@@ -31,22 +32,22 @@ public class SLList {
 		if (node != null) {
 			// head = node;
 			Node prev = node;
-			Node temp = node.next;
 			prev.next = null;
+			Node next = node.next;
 
-			while (temp != null) {
+			while (next != null) {
 
-				node = temp;
+				node = next;
 
 				if (node.next == null) {
 					node.next = prev;
-					temp = null;
+					next = null;
 				}
 				else {
-					temp = node.next;	// save next
+					next = node.next;	// save next
 					node.next = prev;
 					prev = node;
-					node = temp;
+					node = next;
 				}
 			}
 

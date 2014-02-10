@@ -34,19 +34,19 @@ public class Sorters {
 		}
 
 		// System.out.println("");
-		System.out.println("* * * * * * * * * *");
-
-		System.out.print("Left:  ");
-		for (int i = 0; i < left.length; i++) {
-			System.out.print(left[i] + ", ");
-		}
-
-		System.out.println("");
-		System.out.print("Right: ");
-		for (int i = 0; i < right.length; i++) {
-			System.out.print(right[i] + ", ");
-		}
-		System.out.println("");
+		// System.out.println("* * * * * * * * * *");
+		//
+		// System.out.print("Left:  ");
+		// for (int i = 0; i < left.length; i++) {
+		// System.out.print(left[i] + ", ");
+		// }
+		//
+		// System.out.println("");
+		// System.out.print("Right: ");
+		// for (int i = 0; i < right.length; i++) {
+		// System.out.print(right[i] + ", ");
+		// }
+		// System.out.println("");
 
 		left = mergeSort(left);
 		right = mergeSort(right);
