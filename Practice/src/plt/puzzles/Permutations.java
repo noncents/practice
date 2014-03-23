@@ -1,5 +1,8 @@
 package plt.puzzles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Permutations {
 
 	static int counter = 0;
@@ -9,11 +12,20 @@ public class Permutations {
 		test_permutations();
 
 		// test_printTelephoneWords();
+
+		// combine("abcde", new StringBuffer(), 0);
 	}
 
 	public static void test_permutations() {
 
-		permutations("abcd");
+		counter = 0;
+		permutations("abc");
+
+		// permuteIterative("abc".toCharArray());
+		// permuteIterative("abcd".toCharArray());
+		// permuteIterative("abcde".toCharArray());
+
+		// perm2(new String("abc").toCharArray(), 3);
 	}
 
 	public static void test_printTelephoneWords() {
@@ -70,13 +82,14 @@ public class Permutations {
 
 		permute("", str);
 
+		System.out.println("counter = " + counter);
+
 	}
 
 	private static void permute(String prefix, String str) {
 
-		// System.out.println(++counter);
-
 		if (str.length() == 0) {
+			// System.out.println(++counter);
 			System.out.println(prefix);
 		}
 		else {
@@ -84,9 +97,78 @@ public class Permutations {
 			for (int i = 0; i < str.length(); i++) {
 
 				permute(prefix + str.charAt(i), str.substring(0, i) + str.substring(i + 1, str.length()));
+				counter++;
 			}
 		}
 
+	}
+
+	private static void perm2(char[] str, int n) {
+
+		if (n == 1) {
+			System.out.println(str);
+			return;
+		}
+		for (int i = 0; i < n; i++) {
+			swap(str, i, n - 1);
+			perm2(str, n - 1);
+			swap(str, i, n - 1);
+		}
+	}
+
+	// swap the characters at indices i and j
+	private static void swap(char[] a, int i, int j) {
+
+		char c;
+		c = a[i];
+		a[i] = a[j];
+		a[j] = c;
+	}
+
+	public static void combine(String instr, StringBuffer outstr, int index) {
+
+		for (int i = index; i < instr.length(); i++) {
+			outstr.append(instr.charAt(i));
+			System.out.println(outstr);
+			combine(instr, outstr, i + 1);
+			outstr.deleteCharAt(outstr.length() - 1);
+			System.out.println("  " + outstr);
+		}
+	}
+
+	public static void permuteIterative(char[] str) {
+
+		List<String> perms = new ArrayList<String>();
+		List<String> newPerms;
+
+		perms.add(String.valueOf(str[0]));
+
+		int bigO = 0;
+
+		for (int i = 1; i < str.length; i++) {
+
+			newPerms = new ArrayList<String>();
+
+			for (String subStr : perms) {
+
+				// newPerms.add(str[i] + subStr);
+
+				for (int j = 0; j <= subStr.length(); j++) {
+					newPerms.add(subStr.substring(0, j) + str[i] + subStr.substring(j, subStr.length()));
+					bigO++;
+
+				}
+			}
+
+			perms = newPerms;
+		}
+
+		for (String perm : perms) {
+
+			System.out.println(perm);
+		}
+
+		System.out.println("bigO = " + bigO);
 	}
 
 }

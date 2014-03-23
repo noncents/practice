@@ -1,0 +1,113 @@
+1. Given a non-negative integer array that is then shuffled and 1 element is removed, find which element was removed.
+
+2. Assume you are designing/writing code for some small business software how would you go about creating a clean, extensible method for calculating sales tax that can be extended easily to work in different parts of the world.
+
+3. (Two separate questions)
+    3a. Given an integer array, remove the duplicate values and return an integer array
+    3b. Test a dice roll generator method
+
+4. Design a system for tracking employee applicants through the interview process  
+
+What is the data structure which suits best for the Battleship game? The board will be of size n x n, with m different ships each having k1, ..., km lengths. Each ship can either by place horizontally or vertically on the board.
+The structures should be designed such that they can support basic operations for playing a game. For example, the board and a particular (i, j) coordinate representing a position on the board may be passed into a function attack(). The function should return hit if a ship was hit at that position, sunk if a ship has sunk after being attacked at that position, and miss if no ship is at that position.
+Describe your design of the structures, what kind of data they store, and the runtime complexity of typical operations for playing the game (like the attack() function) as a result of your design decisions
+
+M is a 2D matrix of integers (nXm) they are sorted in both row and column Write a function search(int s) that return the exact location of the number or Null using lgn
+> http://leetcode.com/2010/10/searching-2d-sorted-matrix-part-ii.html
+
+Write a program to add a node to the sorted list
+ 
+Spatial question: In a canvas containing other windows (rectangles) place a new window (rectangle) without intersecting others. 
+  
+What do you think your level in Microsoft if we hire you?
+  
+Design a scheduler to run many functions at different times. It needs to (obviously) be thread-safe. Each task which is scheduled to run will have a time stamp, containing a desired execution time, a function pointer (containing the desired function). Also, find a way to supply the arguments to each function. Implement the mechanisms for scheduling/removing work to be done. How would you handle functions that must be serialized as opposed to ones that didn't need to be?
+
+First: Implementation of memcpy. Coding optimization
+Second: UI design questions. Thorough understanding of UI controls and when to use what and why. Messaging between applications.
+Third: Lunch interview. general career goal questions
+Fourth: Coding style questions, approaches to reduce an n2 problem to n 
+
+Rotate a square image by pi/2 radians
+
+reverse a single linked list
+find the largest sum of an array of negative and positive number.    
+insert an element at the end of a circular linked list in which you have just the pointer to the head    
+data structures for multi-indexed data    
+given an array with strings print the unique ones
+
+You have two linked lists that merge at some node. The lists could be billions of nodes long. 
+Find the node where the lists merge in the most optimal time while using a low amount of memory.  
+		>If the lists have a length value, then you should be able to do this pretty simply.
+		>If two lists merge, then they have the same terminal node. That means that from the merge node to the end they have the same length. 
+		So if you subtract the smaller lists length from the larger you end up with a great starting point to begin searching. you then increment down the lists from that point on to find the node where both lists meet.
+		
+		> Above answer is not correct. Its a list so you can only start from the begininning.
+		>If its a doubly linked list, yes, you can start at the end (and should), but you cannot start "mid-list".
+		
+		> I can think of two ways:
+		1) traverse from both heads, get two length: long, short
+		traverse again starting from Array1[long-short] and Array2[0], looking for the same pointer
+		O(4n) time, O(1) space
+
+		2) use a hash table holds all seen pointers. traverse from both heads
+		O(2n) time, O(n) space
+		
+		>Step 1: if the linked lists are not empty, find the length of each linked list. Since they have a common end point, we will get length of common area of the linked lists too.
+		Step 2: find the difference between the length of both list. Start traverse the biggest list till the difference in length between them, provided one of them is bigger than the other.
+		Step 3: now they are at the same remaining length. Traverse both of the together till both are pointing to the same next node.That node is the common node which is the merging point. If there is no such point, then they are not merged.
+		
+How many you need PC to keep in memory maps for project like google maps. All numbers what you need, you can ask.    
+You are given an array with integers (both positive and negative) in any random order. Find the sub-array with the largest sum.    
+Consider n people with random birthdays. How large does n need to be before there is at least a 50% chance that two people have the same birthday?
+	>  the probability reaches 100% when the number of people reaches 367 (since there are 366 possible birthdays, including February 29). However, 99.9% probability is reached with just 70 people, and 50% probability with 23 people.
+	
+Sort in linear time but without extra space as in counting sort  
+
+Continuous performance improvement of a prime-number algorithm optimizing for various characteristics. 
+
+Multiple readers - single writer lock  
+Copy list with next and random pointers without using more memory than needed for a copy
+
+Implement malloc() and free() to solve heap fragmentation problem, while malloc() should be very fast and free() could be slower.
+Design a media player which can load from CD or online, and can shuffle the list, and sequentially / randomly play the songs.
+
+How will you write a function to merge two sorted arrays assuming one of them have enough space to hold all the members.  
+
+Interview 1
+1) You have a c style string containing some spaces. Move the spaces to the starting of the string. Do it in place in one iteration.
+2) You have a bit pattern and an infinite stream of bits coming in. You need to raise an alarm whenever the given pattern comes. Storing the stream is not allowed.
+
+Interview 2
+
+1) You have an array of size N. Implement a queue using this.
+2) A sorted array has been rotated. You need to find out the point of inflexion, i.e the position at which the smallest element of the array is present.(I did this in log n time)
+    For example if the array is [6,7,8,9,1,2,3,4,5], the output should be 4
+
+Interview 3
+
+1) You have a BST and int value(take it to be variable val). You need to print our all possible paths in the BST which sum to val, they may or may not start at the root.
+2) You are given a dictionary and two strings a and b. You need to convert the string a to b such that only one alphabet is changed at a time and after each change the transformed string is in the dictionary. You need to do this in the minimum number of transformations. For example the transformation from cat-->boy can be done as follows
+     cat-->bat-->bot-->boy (if dictionary has bat and bot)
+
+Interview 4
+1) You gave been given a tree(not binary, it can have any number of children) in an array. The ith entry of the array is the parent of the ith node. For the root node this entry is -1. You need to find the height of this tree(O(n) soln was asked for). For example the array [2,6,3,6,3,6,-1] represents the tree below. The height of the tree is 4(the path from 6 to 0)
+
+                                                  6
+                                                  / | \
+                                                  1 3 5
+                                                  / \
+                                                  2 4
+                                                  /
+                                                  0
+Interview Question ? You are given an array of numbers. You need to print the length of the maximum continuous sequence that you encounter. For example if input is [3,8,10,1,9,6,5,7,2 ], the continuous sequences are{1,2,3} and {5,6,7,8,9,10} the latter is the longest one so the answer becomes 6. O(n) solution was asked for, assuming you have a hash map which supports O(1) insertion and fetching operations
+
+
+One was given an array of integers find triplets such that a^2 + b^2 = c^2.
+
+Find if it exists in maze, or prove its non-existence
+	> You need to write a code for finding shortest path in maze.
+	For a recursion use call stack.
+	
+	> Keep an structure (array / binari Tree/ hash table) to "remember" if a "node" has been use to avoid loop.
+	Building a graph and nodes to navigate trough the maze and track back on your node until you reach your first node that have no more "start node" or you have found the "exit node"
